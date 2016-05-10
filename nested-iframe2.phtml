@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Nested iframe 2:: scroll test</title>
+        <style media="screen">
+            html,
+            body {
+                margin: 0;
+            }
+
+            html,
+            body,
+            .content-container,
+            iframe {
+                height: 100%;
+                width: 100%;
+            }
+
+            .content-container {
+                position: relative;
+                -webkit-overflow-scrolling: touch;
+                overflow: auto;
+            }
+
+            body {
+                background: brown;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="content-container">
+            <iframe src="content-iframe.phtml"></iframe>
+        </div>
+    </body>
+</html>
