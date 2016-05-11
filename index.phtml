@@ -4,9 +4,14 @@
         <title>Nested scroll test</title>
     </head>
     <style media="screen">
+        * {
+            box-sizing: border-box;
+        }
+
         html,
         body {
             margin: 0;
+            padding: 0;
         }
 
         body {
@@ -21,8 +26,15 @@
             width: 100%;
         }
 
+        iframe {
+            border: 0;
+            display: block;
+        }
+
         .content-container {
             position: relative;
+            padding: 0;
+            margin: 0;
         }
     </style>
     <body>

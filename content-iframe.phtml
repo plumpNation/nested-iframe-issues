@@ -8,30 +8,40 @@
                 margin: 0;
             }
 
+            body {
+                background: green;
+            }
+
             html,
             body,
-            .content-container,
+            .content-container {
+                height: 100%;
+                width: 100%;
+            }
+
             iframe {
+                border: 0;
+                /*
+                height is completely destroyed by Apple's excuse for a browser, but you need to set
+                this to achieve the 'same' result in proper browsers. It will be the iframe that
+                scrolls rather than the content-container but it will look the same.
+                */
                 height: 100%;
                 width: 100%;
             }
 
             .content-container {
                 position: relative;
-            }
-
-            .content-container {
                 -webkit-overflow-scrolling: touch;
                 overflow: auto;
-            }
-
-            body {
-                background: green;
+                font-size: 1px;
+                
             }
         </style>
     </head>
     <body>
         <div class="content-container">
+            <!-- this iframe is autosized -->
             <iframe src="content.phtml"></iframe>
         </div>
     </body>
