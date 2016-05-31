@@ -6,13 +6,13 @@ them.
 
 Includes:
 * iOS safari scrolling
-* nested iframe caching in Firefox and IE
+* aggressive caching in Firefox and IE
+* scroll jumping when using select box
 
 If you see issues make a pull request or prove to me I should remove the repo.
 
-### An assumption
-This example currently has no example of dynamic content, since the backend for the app I am trying
-to fix creates the html on the server.
+## What is a nested iframe?
+An iframe in content that is loaded by an iframe.
 
 ## What is in this repo?
 A series of phtml files! Why?
@@ -118,3 +118,11 @@ I tried setting headers in meta tags. The surefire way of fixing this is to not 
 attribute of the iframe, rather, set the **src property**. Unfortunately this has to be done with
 javascript in a script tag directly underneath the iframe element. It cannot be async as we need
 to set the property before the page renders, so any code in the dynamic content will not run.
+
+## scroll jumping in iOS
+- Scroll to the bottom of the content.
+- Tap the select menu
+- Observe that the scroll jumps upward.
+
+### The solution
+I have not found a solution for this one yet.
