@@ -35,14 +35,24 @@
                 -webkit-overflow-scrolling: touch;
                 overflow: auto;
                 font-size: 1px;
-                
             }
         </style>
     </head>
     <body>
         <div class="content-container">
-            <!-- this iframe is autosized -->
-            <iframe src="content.phtml"></iframe>
+
+            <button id="boom" type="button">Change</button>
+            <script>
+                document.getElementById('boom').onclick = function () {
+                    document.getElementById('shit').src = 'replace.phtml';
+                };
+            </script>
+
+            <iframe id="shit" name="shit"></iframe>
+
+            <script>
+                document.getElementById('shit').src = 'content.phtml';
+            </script>
         </div>
     </body>
 </html>
