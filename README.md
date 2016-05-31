@@ -1,18 +1,14 @@
-ios-safari-nested-iframe-scroll
+nested-iframe-issues
 ===============================
 
-An example of nested iframes and scrolling specifically to fix scrolling issues in iOS safari.
+An example of nested iframes and the issues this legacy technique can cause and hacks to work around
+them.
 
-This may be wrong, I'm still working on this investigation. I am trying to be right, and if you
-want to help me be right, make a pull request or prove to me I should remove the repo.
+Includes:
+* iOS safari scrolling
+* nested iframe caching in Firefox and IE
 
-## Why on earth?
-Scrolling an iframe in iOS Safari has a
-[commonly known workaround](https://davidwalsh.name/scroll-iframes-ios) which works fine.
-Unfortunately this stops working when you find yourself nested in multiple iframe layers.
-
-This is clearly not good application design, but that is not the point of this example. At the
-time this application was created, it was probably a great idea (originally used framesets btw).
+If you see issues make a pull request or prove to me I should remove the repo.
 
 ### An assumption
 This example currently has no example of dynamic content, since the backend for the app I am trying
@@ -30,7 +26,13 @@ thing in the body.
 
 I have nested content 4 iframes down.
 
-## How does it work?
+## Scrolling in iOS: Is this seriously a problem?
+Scrolling an iframe in iOS Safari has a
+[commonly known workaround](https://davidwalsh.name/scroll-iframes-ios) which works fine.
+Unfortunately this stops working when you find yourself nested in multiple iframe layers.
+
+This is clearly not good application design, but that is not the point of this example. At the
+time this application was created, it was probably a great idea (originally used framesets btw).
 ### tl;dr
 You must wrap an iframe in a div or similar and set `overflow: auto` and
 `-webkit-overflow-scrolling: touch` on that container. This needs to be set on every container
@@ -101,3 +103,18 @@ So, we can't use `display: block`, `overflow: hidden` or `margin-bottom: -4px`.
 `font-size: 0` on the container works for the scroll bars but breaks the scrolling.
 
 The fix we found in the end was to set `font-size: 1px` on the iframe containers.
+
+## iframe caching in Firefox and IE
+
+### How to replicate
+- Create an iframe with a src attribute pointing to content in an existing iframe content.
+- Dynamically change the src property of the new nested iframe by clicking a button.
+- Reload the parent iframe that it is nested inside.
+- The contents remain i.e. the content assigned dynamically via the src property is reloaded, not
+the src specified in the attribute in the HTML page.
+
+### The solution
+I tried setting headers in meta tags. The surefire way of fixing this is to not set the src
+attribute of the iframe, rather, set the **src property**. Unfortunately this has to be done with
+javascript in a script tag directly underneath the iframe element. It cannot be async as we need
+to set the property before the page renders, so any code in the dynamic content will not run.
